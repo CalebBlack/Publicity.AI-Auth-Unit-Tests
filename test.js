@@ -1,18 +1,9 @@
 // Require Webdriver
 const webdriver = require('selenium-webdriver');
 // Require Methods From Webdriver
-const {
-  Builder,
-  By,
-  Key,
-  until
-} = webdriver;
+const {Builder,By,Key,until} = webdriver;
 // Require Utility Functions
-const {
-  randomLetters,
-  randomNumbers,
-  randomInt
-} = require('./utils');
+const {randomLetters, randomNumbers} = require('./utils');
 
 const driver = new webdriver.Builder().forBrowser('chrome').build();
 
@@ -24,7 +15,7 @@ const user = {
   phoneNumber: [435, randomNumbers(3), randomNumbers(4)]
 };
 
-describe('Publicity AI Authentication', function() {
+describe('Publicity.AI Authentication', function() {
   after(function(done) {
     driver.quit();
     done();
@@ -111,8 +102,3 @@ describe('Publicity AI Authentication', function() {
     });
   });
 });
-
-
-//
-// driver.get('https://pai-test.herokuapp.com/users/sign_in');
-// driver.findElement(By.name('user[email]')).sendKeys('');
