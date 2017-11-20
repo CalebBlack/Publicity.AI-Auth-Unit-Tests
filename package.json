@@ -1,7 +1,7 @@
 {
   "name": "Publicity.AI-Auth-Unit-Tests",
   "version": "1.0.0",
-  "description": "",
+  "description": "Tests written for Publicity.AI using Mocha & Selenium in Node.js",
   "main": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,8 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/CalebBlack/Publicity.AI-Auth-Unit-Tests.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "CalebBlack",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CalebBlack/Publicity.AI-Auth-Unit-Tests/issues"
