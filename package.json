@@ -16,11 +16,7 @@
     "url": "https://github.com/CalebBlack/Publicity.AI-Auth-Unit-Tests/issues"
   },
   "homepage": "https://github.com/CalebBlack/Publicity.AI-Auth-Unit-Tests#readme",
-  "devDependencies": {
-    "chai": "^4.1.2",
-    "chai-http": "^3.0.0"
-  },
   "dependencies": {
-    "selenium-webdriver": "^2.44.0"
+    "selenium-webdriver": "^3.6.0"
   }
 }
