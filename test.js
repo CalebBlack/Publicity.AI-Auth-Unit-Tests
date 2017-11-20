@@ -7,6 +7,7 @@ const {
   Key,
   until
 } = webdriver;
+// Require Utility Functions
 const {
   randomLetters,
   randomNumbers,
@@ -61,19 +62,50 @@ describe('Publicity AI Authentication', function() {
     it('Can sign up', function(done) {
       this.timeout(5000);
       driver.findElement(By.id('frack')).click().then(() => {
-        driver.findElement(By.css('.alert.alert-success.alert-dismissable')).getText().then(text => {
-          if (!text.includes('Welcome! You have signed up successfully.')) throw new Error('Success Message Missing!');
-          done();
+        driver.getCurrentUrl().then(url => {
+          if (url.split('?')[0] !== 'https://pai-test.herokuapp.com/') throw new Error('Not at home page!');
+          driver.findElement(By.css('.alert.alert-success.alert-dismissable')).getText().then(text => {
+            if (!text.includes('Welcome! You have signed up successfully.')) throw new Error('Success Message Missing!');
+            done();
+          });
         });
       });
     });
   });
   describe('Logout', function() {
     it('Should log out', function(done) {
-      driver.findElement(By.linkText('Logout')).click().then(()=>{
+      driver.findElement(By.linkText('Logout')).click().then(() => {
         driver.findElement(By.css('.alert.alert-success.alert-dismissable')).getText().then(text => {
           if (!text.includes('Signed out successfully.')) throw new Error('Success Message Missing!');
           done();
+        });
+      });
+    });
+  });
+  describe('Login', function() {
+    it('Should get the page', function(done) {
+      this.timeout(10000);
+      driver.get('https://pai-test.herokuapp.com/users/sign_in').then(() => {
+        done();
+      });
+    });
+    it('Can enter the login details', function(done) {
+      this.timeout(3000);
+      driver.findElement(By.name('user[email]')).sendKeys(user.email).then(() => {
+        driver.findElement(By.name('user[password]')).sendKeys(user.password).then(() => {
+          done();
+        });
+      });
+    });
+    it('Can login successfully', function(done) {
+      this.timeout(4000);
+      driver.findElement(By.name('commit')).click().then(() => {
+        driver.getCurrentUrl().then(url => {
+          if (url.split('?')[0] !== 'https://pai-test.herokuapp.com/') throw new Error('Not at home page!');
+          driver.findElement(By.css('.alert.alert-success.alert-dismissable')).getText().then(text => {
+            if (!text.includes('Signed in successfully.')) throw new Error('Success Message Missing!');
+            done();
+          });
         });
       });
     });
