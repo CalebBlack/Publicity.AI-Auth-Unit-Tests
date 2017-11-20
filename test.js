@@ -57,23 +57,29 @@ describe('Publicity.AI Authentication', function() {
         driver.getCurrentUrl().then(url => {
           /// url.split('?')[0] Prevents the Query String from Causing a Mismatch
           if (url.split('?')[0] !== 'https://pai-test.herokuapp.com/') throw new Error('Not at home page!');
-          driver.findElement(By.css('.alert.alert-success.alert-dismissable')).getText().then(text => {
-            if (!text.includes('Welcome! You have signed up successfully.')) throw new Error('Success Message Missing!');
-            done();
-          });
+          done();
         });
+      });
+    });
+    it('Shows success message',function(done){
+      driver.findElement(By.css('.alert.alert-success.alert-dismissable')).getText().then(text => {
+        if (!text.includes('Welcome! You have signed up successfully.')) throw new Error('Success Message Missing!');
+        done();
       });
     });
   });
   describe('Logout', function() {
     it('Should log out', function(done) {
       driver.findElement(By.linkText('Logout')).click().then(() => {
-        driver.findElement(By.css('.alert.alert-success.alert-dismissable')).getText().then(text => {
-          if (!text.includes('Signed out successfully.')) throw new Error('Success Message Missing!');
-          done();
-        });
+        done();
       });
     });
+    it('Shows success message',function(done){
+      driver.findElement(By.css('.alert.alert-success.alert-dismissable')).getText().then(text => {
+        if (!text.includes('Signed out successfully.')) throw new Error('Success Message Missing!');
+        done();
+      });
+    })
   });
   describe('Login', function() {
     it('Should get the page', function(done) {
@@ -95,11 +101,14 @@ describe('Publicity.AI Authentication', function() {
       driver.findElement(By.name('commit')).click().then(() => {
         driver.getCurrentUrl().then(url => {
           if (url.split('?')[0] !== 'https://pai-test.herokuapp.com/') throw new Error('Not at home page!');
-          driver.findElement(By.css('.alert.alert-success.alert-dismissable')).getText().then(text => {
-            if (!text.includes('Signed in successfully.')) throw new Error('Success Message Missing!');
-            done();
-          });
+          done();
         });
+      });
+    });
+    it('Shows success message',function(done){
+      driver.findElement(By.css('.alert.alert-success.alert-dismissable')).getText().then(text => {
+        if (!text.includes('Signed in successfully.')) throw new Error('Success Message Missing!');
+        done();
       });
     });
   });
