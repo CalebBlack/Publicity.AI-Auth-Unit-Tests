@@ -27,7 +27,7 @@ describe('Publicity AI Authentication',function(){
       });
     });
     it('can enter the signup details successfully',function(){
-      this.timeout(10000);
+      this.timeout(3000);
       return new Promise((resolve,reject)=>{
         // NOTE: Although not sytactically pretty, it is best to chain thens here because
         // .then is a method of a regular object not a promise so we cannot use Promise.All,
@@ -52,9 +52,16 @@ describe('Publicity AI Authentication',function(){
       });
     });
     it('can sign up successfully',function(){
+      this.timeout(3500);
       return new Promise((resolve,reject)=>{
         driver.findElement(By.id('frack')).click().then(()=>{
-          resolve();
+          let success = driver.findElement(By.css('.alert.alert-success.alert-dismissable'));
+          success.then((element)=>{
+            success.getText().then(text=>{
+              if (!text.includes('Welcome! You have signed up successfully.')) throw new Error('Success Message Missing!');
+              resolve();
+            });
+          });
         });
       });
     });
