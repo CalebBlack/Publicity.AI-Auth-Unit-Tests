@@ -1,19 +1,16 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
+const webdriver = require('selenium-webdriver'),
+    chrome = require('selenium-webdriver/chrome');
+const {Builder, By, Key, until} = webdriver;
+var driver = new webdriver.Builder().forBrowser('chrome').withCapabilities(webdriver.Capabilities.chrome()).build();
 
-const expect = chai.expect;
-
-const siteURL = 'https://pai-test.herokuapp.com';
-
-chai.use(chaiHttp);
-
-describe('Sign In',function(){
-  it('GET returns valid web page',function(done){
-    chai.request(siteURL).get('/users/sign_in').end(function(err,res){
-      console.log(res);
-      expect(res).to.have.status(200);
-      expect(res).to.be.html;
+describe('Sign Up',()=>{
+  it('Should get the page successfully',function(done){
+    this.timeout(10000);
+    driver.get('https://pai-test.herokuapp.com/users/sign_up').then(()=>{
       done();
     });
   });
 });
+// 
+// driver.get('https://pai-test.herokuapp.com/users/sign_in');
+// driver.findElement(By.name('user[email]')).sendKeys('');
