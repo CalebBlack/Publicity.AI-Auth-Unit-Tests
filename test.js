@@ -1,11 +1,9 @@
-// Require Webdriver
-const webdriver = require('selenium-webdriver');
 // Require Methods From Webdriver
-const {Builder,By,Key,until} = webdriver;
+const {Builder,By,Key,until} = require('selenium-webdriver');
 // Require Utility Functions
 const {randomLetters, randomNumbers} = require('./utils');
 // Create the Driver
-const driver = new webdriver.Builder().forBrowser('chrome').build();
+const driver = new Builder().forBrowser('chrome').build();
 
 // Generate Random User Details to Test the Auth with
 const user = {
