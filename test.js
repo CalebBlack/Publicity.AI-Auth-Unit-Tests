@@ -30,7 +30,7 @@ describe('Publicity.AI Authentication', function() {
     });
     it('Can enter the signup details', function(done) {
       this.timeout(3000);
-      // NOTE: Although not sytactically pretty, it is best to chain thens here because
+      // NOTE: Although not sytactically pretty, it is best to chain thens here because in this case
       // .then is a method of a regular object not a promise so we cannot use Promise.All,
       // Unless we wrap it in a promise which would be more inefficient and ugly.
       driver.findElement(By.name('user[first_name]')).sendKeys(user.firstName).then(() => {
