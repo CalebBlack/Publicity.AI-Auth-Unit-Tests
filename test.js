@@ -4,9 +4,10 @@ const webdriver = require('selenium-webdriver');
 const {Builder,By,Key,until} = webdriver;
 // Require Utility Functions
 const {randomLetters, randomNumbers} = require('./utils');
-
+// Create the Driver
 const driver = new webdriver.Builder().forBrowser('chrome').build();
 
+// Generate Random User Details to Test the Auth with
 const user = {
   firstName: randomLetters(5),
   lastName: randomLetters(5),
@@ -15,6 +16,7 @@ const user = {
   phoneNumber: [435, randomNumbers(3), randomNumbers(4)]
 };
 
+// Begin Tests
 describe('Publicity.AI Authentication', function() {
   after(function(done) {
     driver.quit();
@@ -22,6 +24,7 @@ describe('Publicity.AI Authentication', function() {
   });
   describe('Sign Up', () => {
     it('Should get the page', function(done) {
+      // Setting the timout prevents Mocha from automatically ending the test early.
       this.timeout(10000);
       driver.get('https://pai-test.herokuapp.com/users/sign_up').then(() => {
         done();
@@ -54,6 +57,7 @@ describe('Publicity.AI Authentication', function() {
       this.timeout(5000);
       driver.findElement(By.id('frack')).click().then(() => {
         driver.getCurrentUrl().then(url => {
+          /// url.split('?')[0] Prevents the Query String from Causing a Mismatch
           if (url.split('?')[0] !== 'https://pai-test.herokuapp.com/') throw new Error('Not at home page!');
           driver.findElement(By.css('.alert.alert-success.alert-dismissable')).getText().then(text => {
             if (!text.includes('Welcome! You have signed up successfully.')) throw new Error('Success Message Missing!');
